@@ -1,10 +1,15 @@
 # rtl8814au
 Drivers for the rtl8814au chipset wireless adapters
 
+# NOTE
+
+This is a fork from [aircrack-ng](https://github.com/aircrack-ng/rtl8814au.git) as I couldn't tell whether they were maintaining it anymore. I only plan on updating this as my own kernel updates break it so it will support whatever version of the kernel I have locally :) 
+
+I'm happy to accept patches
 
 # build & install
 ```
-$ git clone https://github.com/aircrack-ng/rtl8814au.git
+$ git clone https://github.com/SteveBronder/rtl8814au
 $ cd rtl8814au
 $ make
 $ make install
