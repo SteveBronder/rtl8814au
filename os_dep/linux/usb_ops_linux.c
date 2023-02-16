@@ -745,7 +745,11 @@ void usb_init_recvbuf(_adapter *padapter, struct recv_buf *precvbuf)
 int recvbuf2recvframe(PADAPTER padapter, void *ptr);
 
 #ifdef CONFIG_USE_USB_BUFFER_ALLOC_RX
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0))
+void usb_recv_tasklet(void *priv, long unsigned int /* x*/)
+#else
 void usb_recv_tasklet(void *priv)
+#endif
 {
 	struct recv_buf *precvbuf = NULL;
 	_adapter	*padapter = (_adapter *)priv;
@@ -883,7 +887,11 @@ u32 usb_read_port(struct intf_hdl *pintfhdl, u32 addr, u32 cnt, u8 *rmem)
 }
 #else	/* CONFIG_USE_USB_BUFFER_ALLOC_RX */
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0))
+void usb_recv_tasklet(void *priv, long unsigned int /* x*/)
+#else
 void usb_recv_tasklet(void *priv)
+#endif
 {
 	_pkt			*pskb;
 	_adapter		*padapter = (_adapter *)priv;

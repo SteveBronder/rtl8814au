@@ -276,7 +276,11 @@ void fill_txdesc_bmc_tx_rate(struct pkt_attrib *pattrib, u8 *ptxdesc);
 	s32 rtl8814au_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
 	s32	 rtl8814au_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmitframe);
 	s32 rtl8814au_xmit_buf_handler(PADAPTER padapter);
-	void rtl8814au_xmit_tasklet(void *priv);
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0))
+void rtl8814au_xmit_tasklet(void *priv, long unsigned int /* x*/);
+#else
+void rtl8814au_xmit_tasklet(void *priv);
+#endif
 	s32 rtl8814au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf);
 #endif /* CONFIG_USB_HCI */
 

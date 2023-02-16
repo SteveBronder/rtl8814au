@@ -201,8 +201,11 @@ _exit_recvbuf2recvframe:
 	return _SUCCESS;
 }
 
-
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0))
+void rtl8814au_xmit_tasklet(void *priv, long unsigned int /* x*/)
+#else
 void rtl8814au_xmit_tasklet(void *priv)
+#endif
 {
 	int ret = _FALSE;
 	_adapter *padapter = (_adapter *)priv;
